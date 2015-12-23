@@ -106,5 +106,4 @@ class PurchaseRequest extends AbstractRequest
 
         return $this->response = new PurchaseResponse($this, $httpResponse->getBody(true));
     }
-
 }

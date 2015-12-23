@@ -23,5 +23,4 @@ class Response extends AbstractResponse
         $this->data = $array['response'];
         unset($array);
     }
-
 }

@@ -18,17 +18,18 @@ use LSS\Array2XML;
  *   $transaction->setTransactionReference($auth_id);
  *   $response = $transaction->send();
  * </code>
- *
  */
 class CardRequest extends AbstractRequest
 {
 
 
-    public function getFormUrl(){
+    public function getFormUrl()
+    {
         $this->getParameter('formUrl');
     }
 
-    public function setFormUrl($value){
+    public function setFormUrl($value)
+    {
         return $this->setParameter('formUrl', $value);
     }
 
@@ -58,5 +59,4 @@ class CardRequest extends AbstractRequest
 
         return $this->response = new PurchaseResponse($this, $httpResponse->getBody(true));
     }
-
 }

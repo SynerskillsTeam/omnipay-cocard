@@ -1,5 +1,6 @@
 <?php
 namespace Omnipay\Cocard\Message;
+
 use Omnipay\Common\Message\RedirectResponseInterface;
 
 abstract class AbstractResponse extends \Omnipay\Common\Message\AbstractResponse implements RedirectResponseInterface
@@ -22,7 +23,8 @@ abstract class AbstractResponse extends \Omnipay\Common\Message\AbstractResponse
         '251' => 'Lost card.',
         '252' => 'Stolen card.',
         '253' => 'Fraudulent card.',
-        '260' => 'Declined with further instructions available. (See response text) 261 Declined-Stop all recurring payments.',
+        '260' => 'Declined with further instructions available.\
+            (See response text) 261 Declined-Stop all recurring payments.',
         '262' => 'Declined-Stop this recurring program.',
         '263' => 'Declined-Update cardholder data available.',
         '264' => 'Declined-Retry in a few days.',

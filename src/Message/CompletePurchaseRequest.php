@@ -30,5 +30,4 @@ class CompletePurchaseRequest extends PurchaseRequest
 
         return $this->response = new Response($this, $httpResponse->getBody(true));
     }
-
 }

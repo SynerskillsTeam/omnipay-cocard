@@ -40,7 +40,7 @@ class Gateway extends AbstractGateway
      *
      * Use this request to capture and process a previously created authorization.
      *
-     * @param array $parameters
+     * @param  array $parameters
      * @return \Omnipay\Cocard\Message\CaptureRequest
      */
     public function capture(array $parameters = array())
