@@ -1,0 +1,40 @@
+{
+    "name": "henter/omnipay-cocard",
+    "type": "library",
+    "description": "Cocard gateway driver for the Omnipay payment processing library",
+    "keywords": [
+        "cocard",
+        "gateway",
+        "merchant",
+        "omnipay",
+        "pay",
+        "payment"
+    ],
+    "homepage": "https://github.com/henter/omnipay-cocard",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Henter",
+            "email": "henter@henter.me"
+        },
+        {
+            "name": "Omnipay Contributors",
+            "homepage": "https://github.com/henter/omnipay-cocard/contributors"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Omnipay\\Cocard\\" : "src/" }
+    },
+    "require": {
+        "omnipay/common": "~2.0",
+        "openlss/lib-array2xml": "0.0.10"
+    },
+    "require-dev": {
+        "omnipay/tests": "~2.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
+}

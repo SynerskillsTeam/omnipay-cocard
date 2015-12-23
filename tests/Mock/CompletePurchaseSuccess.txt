@@ -1,0 +1,98 @@
+HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Length: 689
+Content-Type: text/xml; charset=utf-8
+Node: VENUS
+X-Powered-By: ASP.NET
+X-AspNet-Version: 4.0.30319
+Date: Fri, 15 Feb 2013 14:06:34 GMT
+
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <result>1</result>
+  <result-text>SUCCESS</result-text>
+  <transaction-id>2924647560</transaction-id>
+  <result-code>100</result-code>
+  <authorization-code>123456</authorization-code>
+  <avs-result>N</avs-result>
+  <cvv-result>N</cvv-result>
+  <action-type>sale</action-type>
+  <amount>12.00</amount>
+  <amount-authorized>12.00</amount-authorized>
+  <tip-amount>0.00</tip-amount>
+  <surcharge-amount>0.00</surcharge-amount>
+  <ip-address>127.0.0.1</ip-address>
+  <industry>ecommerce</industry>
+  <processor-id>ccprocessora</processor-id>
+  <currency>USD</currency>
+  <order-description>Small Order</order-description>
+  <customer-id>123</customer-id>
+  <customer-vault-id>123</customer-vault-id>
+  <merchant-defined-field-1>Red</merchant-defined-field-1>
+  <merchant-defined-field-2>Medium</merchant-defined-field-2>
+  <order-id>1234</order-id>
+  <tax-amount>0.00</tax-amount>
+  <shipping-amount>0.00</shipping-amount>
+  <billing>
+    <billing-id>1789441220</billing-id>
+    <first-name>John</first-name>
+    <last-name>Smith</last-name>
+    <address1>1234 Main St.</address1>
+    <city>Beverly Hills</city>
+    <state>CA</state>
+    <postal>90210</postal>
+    <country>US</country>
+    <phone>555-555-5555</phone>
+    <email>test@example.com</email>
+    <company>Acme, Inc.</company>
+    <address2>Suite 205</address2>
+    <fax>555-555-5555</fax>
+    <cc-number>411111******1111</cc-number>
+    <cc-exp>1012</cc-exp>
+    <priority>1</priority>
+  </billing>
+  <shipping>
+    <shipping-id>772143614</shipping-id>
+    <first-name>Mary</first-name>
+    <last-name>Smith</last-name>
+    <address1>1234 Main St.</address1>
+    <city>Beverly Hills</city>
+    <state>CA</state>
+    <postal>90210</postal>
+    <country>US</country>
+    <phone>555-555-5555</phone>
+    <company>Acme, Inc.</company>
+    <address2>Suite 205</address2>
+    <priority>1</priority>
+  </shipping>
+  <product>
+    <product-code>SKU-123456</product-code>
+    <description>test product description</description>
+    <commodity-code>abc</commodity-code>
+    <unit-of-measure>1</unit-of-measure>
+    <unit-cost>5.0000</unit-cost>
+    <quantity>1.0000</quantity>
+    <total-amount>7.00</total-amount>
+    <tax-amount>2.00</tax-amount>
+    <tax-rate>1.00</tax-rate>
+    <discount-amount>2.00</discount-amount>
+    <discount-rate>1.00</discount-rate>
+    <tax-type>sales</tax-type>
+    <alternate-tax-id>12345</alternate-tax-id>
+  </product>
+  <product>
+    <product-code>SKU-123456</product-code>
+    <description>test 2 product description</description>
+    <commodity-code>abc</commodity-code>
+    <unit-of-measure>2</unit-of-measure>
+    <unit-cost>2.5000</unit-cost>
+    <quantity>2.0000</quantity>
+    <total-amount>7.00</total-amount>
+    <tax-amount>2.00</tax-amount>
+    <tax-rate>1.00</tax-rate>
+    <discount-amount>2.00</discount-amount>
+    <discount-rate>1.00</discount-rate>
+    <tax-type>sales</tax-type>
+    <alternate-tax-id>12345</alternate-tax-id>
+  </product>
+</response>
