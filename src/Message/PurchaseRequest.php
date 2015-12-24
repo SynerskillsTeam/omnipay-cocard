@@ -9,86 +9,51 @@ use LSS\Array2XML;
 
 class PurchaseRequest extends AbstractRequest
 {
+    public function setBilling($value)
+    {
+        $this->setParameter('billing', $value);
+    }
+
+    public function getBilling()
+    {
+        return $this->getParameter('billing');
+    }
+
+    public function setShipping($value)
+    {
+        $this->setParameter('shipping', $value);
+    }
+
+    public function getShipping()
+    {
+        return $this->getParameter('shipping');
+    }
+
     public function getData()
     {
         $this->validate('amount');
 
         $array = [
             'api-key' => $this->getApiKey(),
-            'redirect-url' => 'http://omnipay_demo.cc/test_complete',
+            'redirect-url' => $this->getReturnUrl(),
             'amount' => $this->getAmount(),
             'ip-address' => $this->getClientIp(),
-            'currency' => 'USD',
+            'currency' => $this->getCurrency(),
             'order-id' => '1234',
             'order-description' => '',
             'merchant-defined-field-1' => 'test1',
             'merchant-defined-field-2' => 'test2',
             'tax-amount' => 0.00,
             'shipping-amount' => 0.00,
+            'customer-id' => 123456,
             'customer-vault-id' => '11111',
-            'billing' => [
-                [
-                    'first-name' => 'Henter',
-                    'last-name' => 'Chow',
-                    'address1' => 'Huangpu District',
-                    'address2' => 'xxx',
-                    'city' => 'Shanghai',
-                    'state' => 'Shanghai',
-                    'postal' => '1234',
-                    'country' => 'CN',
-                    'email' => 'henter@henter.me',
-                    'phone' => '55555555',
-                    'company' => 'hc',
-                    'fax' => '55555'
-                ],
-            ],
-            'shipping' => [
-                [
-                    'first-name' => 'Henter',
-                    'last-name' => 'Chow',
-                    'address1' => 'Huangpu District',
-                    'address2' => 'xxx',
-                    'city' => 'Shanghai',
-                    'state' => 'Shanghai',
-                    'postal' => '1234',
-                    'country' => 'CN',
-                    'phone' => '55555555',
-                    'company' => 'hc',
-                ],
-            ],
-            'product' => [
-                [
-                    'product-code' => 'SKU-123',
-                    'description' => 'test',
-                    'commodity-code' => 'abc',
-                    'unit-of-measure' => 'lbs',
-                    'unit-cost' => '5.00',
-                    'quantity' => 1,
-                    'total-amount' => 7.22,
-                    'tax-amount' => 0.00,
-                    'tax-rate' => 1.00,
-                    'discount-amount' => 1.00,
-                    'discount-rate' => 1.00,
-                    'tax-type' => 'sales',
-                    'alternate-tax-id' => '12345'
-                ],
-                [
-                    'product-code' => 'SKU-12345',
-                    'description' => 'test',
-                    'commodity-code' => 'abc',
-                    'unit-of-measure' => 'lbs',
-                    'unit-cost' => '5.00',
-                    'quantity' => 1,
-                    'total-amount' => 7.22,
-                    'tax-amount' => 0.00,
-                    'tax-rate' => 1.00,
-                    'discount-amount' => 1.00,
-                    'discount-rate' => 1.00,
-                    'tax-type' => 'sales',
-                    'alternate-tax-id' => '12345'
-                ],
-            ]
+            'billing' => $this->getBilling(),
+            'shipping' => $this->getShipping(),
         ];
+
+        foreach($this->getItems() as $item){
+            $array['product'][] = $item;
+        }
         return $array;
     }
 
