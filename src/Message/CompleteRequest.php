@@ -4,7 +4,7 @@ namespace Omnipay\Cocard\Message;
 
 use LSS\Array2XML;
 
-class CompletePurchaseRequest extends PurchaseRequest
+class CompleteRequest extends PurchaseRequest
 {
 
     public function getData()

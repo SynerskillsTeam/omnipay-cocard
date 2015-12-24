@@ -1,17 +1,19 @@
 <?php
+/**
+ * Cocard Gateway
+ *
+ * @author Henter <henter@henter.me>
+ * @date   2015-12-17
+ */
 
 namespace Omnipay\Cocard;
-
-use Omnipay\Cocard\Message\CompletePurchaseRequest;
-use Omnipay\Cocard\Message\PurchaseRequest;
-use Omnipay\Common\AbstractGateway;
 
 /**
  * Cocard Gateway
  *
  * @link https://secure.cocardgateway.com/
  */
-class Gateway extends AbstractGateway
+class Gateway extends \Omnipay\Common\AbstractGateway
 {
     public function getName()
     {
@@ -36,30 +38,59 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * Capture Request
-     *
-     * Use this request to capture and process a previously created authorization.
-     *
      * @param  array $parameters
      * @return \Omnipay\Cocard\Message\CaptureRequest
      */
-    public function capture(array $parameters = array())
+    public function capture(array $parameters = [])
     {
         return $this->createRequest('\Omnipay\Cocard\Message\CaptureRequest', $parameters);
     }
 
-    public function purchase(array $parameters = array())
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\PurchaseRequest
+     */
+    public function purchase(array $parameters = [])
     {
         return $this->createRequest('\Omnipay\Cocard\Message\PurchaseRequest', $parameters);
     }
 
-    public function completePurchase(array $parameters = array())
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\CompleteRequest
+     */
+    public function complete(array $parameters = [])
     {
-        return $this->createRequest('\Omnipay\Cocard\Message\CompletePurchaseRequest', $parameters);
+        return $this->createRequest('\Omnipay\Cocard\Message\CompleteRequest', $parameters);
     }
 
-    public function refund(array $parameters = array())
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\RefundRequest
+     */
+    public function refund(array $parameters = [])
     {
         return $this->createRequest('\Omnipay\Cocard\Message\RefundRequest', $parameters);
     }
+
+
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\RecurringRequest
+     */
+    public function recurring(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\Cocard\Message\RecurringRequest', $parameters);
+    }
+
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\UpdateRecurringRequest
+     */
+    public function updateRecurring(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\Cocard\Message\RecurringRequest', $parameters);
+    }
+
+    //TODO, customer add, update, etc.
 }
