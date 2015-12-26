@@ -18,10 +18,43 @@ class GatewayTest extends GatewayTestCase
 
         $this->gateway = new Gateway($this->getHttpClient(), $this->getHttpRequest());
 
+        $products = [
+            [
+                'product-code' => 'SKU-123',
+                'description' => 'test',
+                'commodity-code' => 'abc',
+                'unit-of-measure' => 'lbs',
+                'unit-cost' => '5.00',
+                'quantity' => 1,
+                'total-amount' => 7.22,
+                'tax-amount' => 0.00,
+                'tax-rate' => 1.00,
+                'discount-amount' => 1.00,
+                'discount-rate' => 1.00,
+                'tax-type' => 'sales',
+                'alternate-tax-id' => '12345'
+            ],
+            [
+                'product-code' => 'SKU-12345',
+                'description' => 'test',
+                'commodity-code' => 'abc',
+                'unit-of-measure' => 'lbs',
+                'unit-cost' => '5.00',
+                'quantity' => 1,
+                'total-amount' => 7.22,
+                'tax-amount' => 0.00,
+                'tax-rate' => 1.00,
+                'discount-amount' => 1.00,
+                'discount-rate' => 1.00,
+                'tax-type' => 'sales',
+                'alternate-tax-id' => '12345'
+            ]
+        ];
         $this->options = array(
             'amount' => '10.00',
             'returnUrl' => 'https://www.example.com/return',
             'cilentIp' => '127.0.0.1',
+            'products' => $products,
             'card' => new CreditCard(array(
                 'firstName' => 'Example',
                 'lastName' => 'User',

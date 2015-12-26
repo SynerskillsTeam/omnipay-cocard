@@ -8,6 +8,8 @@
  
 namespace Omnipay\Cocard\Message;
 
+use LSS\Array2XML;
+
 /**
  * CocardGateway Abstract Request
  *
@@ -44,5 +46,31 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     protected function getCostInteger($amount)
     {
         return (int) round($amount * pow(10, $this->getCurrencyDecimalPlaces()));
+    }
+
+    /**
+     * Send the request
+     *
+     * @return Response
+     */
+    public function send()
+    {
+        return $this->sendData($this->getData());
+    }
+
+    /**
+     * @param mixed $data
+     * @return Response
+     */
+    public function sendData($data, $root = '')
+    {
+        $xmlDom = Array2XML::createXML($root, $this->getData());
+        $headers = array(
+            'Content-Type' => 'text/xml; charset=utf-8',
+        );
+
+        $httpResponse = $this->httpClient->post($this->getEndpoint(), $headers, $xmlDom->saveXML())->send();
+
+        return $this->response = new Response($this, $httpResponse->getBody(true));
     }
 }

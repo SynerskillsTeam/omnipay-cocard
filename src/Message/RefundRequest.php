@@ -5,8 +5,6 @@
 
 namespace Omnipay\Cocard\Message;
 
-use LSS\Array2XML;
-
 class RefundRequest extends AbstractRequest
 {
 
@@ -21,14 +19,8 @@ class RefundRequest extends AbstractRequest
         ];
     }
 
-    public function sendData($data)
+    public function sendData($data, $root = '')
     {
-        $xmlDom = Array2XML::createXML('refund', $this->getData());
-        $headers = array(
-            'Content-Type' => 'text/xml; charset=utf-8',
-        );
-
-        $httpResponse = $this->httpClient->post($this->getEndpoint(), $headers, $xmlDom->saveXML())->send();
-        return $this->response = new CaptureResponse($this, $httpResponse->getBody(true));
+        return parent::sendData($data, 'refund');
     }
 }

@@ -2,9 +2,7 @@
 
 namespace Omnipay\Cocard\Message;
 
-use LSS\Array2XML;
-
-class CompleteRequest extends PurchaseRequest
+class CompleteRequest extends AbstractRequest
 {
 
     public function getData()
@@ -12,22 +10,12 @@ class CompleteRequest extends PurchaseRequest
         $this->validate('token');
         return [
             'api-key' => $this->getApiKey(),
-            'token-id' => $this->getParameter('token')
+            'token-id' => $this->getToken()
         ];
     }
 
-    public function sendData($data)
+    public function sendData($data, $root = '')
     {
-
-        $xmlDom = Array2XML::createXML('complete-action', $this->getData());
-
-        // post to Cocard
-        $headers = array(
-            'Content-Type' => 'text/xml; charset=utf-8',
-        );
-
-        $httpResponse = $this->httpClient->post($this->getEndpoint(), $headers, $xmlDom->saveXML())->send();
-
-        return $this->response = new Response($this, $httpResponse->getBody(true));
+        return parent::sendData($data, 'complete-action');
     }
 }

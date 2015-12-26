@@ -48,7 +48,11 @@ class CardRequest extends AbstractRequest
         ];
     }
 
-    public function sendData($data)
+    /**
+     * @param mixed $data
+     * @return Response
+     */
+    public function sendData($data, $root = '')
     {
         // post to Cocard
         $headers = array(
@@ -57,6 +61,6 @@ class CardRequest extends AbstractRequest
 
         $httpResponse = $this->httpClient->post($this->getEndpoint(), $headers, $this->getData())->send();
 
-        return $this->response = new PurchaseResponse($this, $httpResponse->getBody(true));
+        return $this->response = new Response($this, $httpResponse->getBody(true));
     }
 }

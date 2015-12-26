@@ -5,7 +5,6 @@
 
 namespace Omnipay\Cocard\Message;
 
-use LSS\Array2XML;
 
 class PurchaseRequest extends AbstractRequest
 {
@@ -29,9 +28,52 @@ class PurchaseRequest extends AbstractRequest
         return $this->getParameter('shipping');
     }
 
+    public function setBaseData($value)
+    {
+        $this->setParameter('baseData', $value);
+    }
+
+    public function getBaseData()
+    {
+        return $this->getParameter('baseData');
+    }
+
+    public function getProducts(){
+        return $this->getParameter('products');
+    }
+
+    /**
+     * set products, check product keys
+     * @param $products
+     * @return \Omnipay\Common\Message\AbstractRequest
+     * @throws \Exception
+     */
+    public function setProducts($products){
+        $required_keys = [
+            'product-code',
+            'description',
+            'commodity-code',
+            'unit-of-measure',
+            'unit-cost',
+            'quantity',
+            'total-amount',
+            'tax-amount',
+            'tax-rate'
+        ];
+
+        foreach($products as $product){
+            foreach($required_keys as $rk){
+                if(!isset($product[$rk])){
+                    throw new \Exception("product key error: ".$rk);
+                }
+            }
+        }
+        return $this->setParameter('products', $products);
+    }
+
     public function getData()
     {
-        $this->validate('amount');
+        $this->validate('amount', 'returnUrl');
 
         $array = [
             'api-key' => $this->getApiKey(),
@@ -39,36 +81,35 @@ class PurchaseRequest extends AbstractRequest
             'amount' => $this->getAmount(),
             'ip-address' => $this->getClientIp(),
             'currency' => $this->getCurrency(),
-            'order-id' => '1234',
-            'order-description' => '',
-            'merchant-defined-field-1' => 'test1',
-            'merchant-defined-field-2' => 'test2',
-            'tax-amount' => 0.00,
-            'shipping-amount' => 0.00,
-            'customer-id' => 123456,
-            'customer-vault-id' => '11111',
             'billing' => $this->getBilling(),
             'shipping' => $this->getShipping(),
+            'product' => $this->getProducts(),
+            //'order-id' => '123',
+            //'order-description' => 'xxx',
+            //'merchant-defined-field-1' => 'test1',
+            //'tax-amount' => 0.00,
+            //'shipping-amount' => 0.00,
+            //'customer-id' => 123456, //same with customer-vault-id
         ];
 
-        foreach($this->getItems() as $item){
-            $array['product'][] = $item;
+        //customer-vault-id, order-id, order-description, merchant-defined-field-x, tax-amount, shipping-amount
+        if($base = $this->getBaseData()){
+            $base_keys = ['customer-vault-id', 'order-id', 'order-description', 'tax-amount', 'shipping-amount'];
+            foreach($base_keys as $bk){
+                if(isset($base[$bk])){
+                    $array[$bk] = $base[$bk];
+                }
+            }
+        }
+
+        if(!$array['product']){
+            throw new \Exception("products error");
         }
         return $array;
     }
 
     public function sendData($data)
     {
-
-        $xmlDom = Array2XML::createXML('sale', $this->getData());
-
-        // post to Cocard
-        $headers = array(
-            'Content-Type' => 'text/xml; charset=utf-8',
-        );
-
-        $httpResponse = $this->httpClient->post($this->getEndpoint(), $headers, $xmlDom->saveXML())->send();
-
-        return $this->response = new PurchaseResponse($this, $httpResponse->getBody(true));
+        return parent::sendData($data, 'sale');
     }
 }

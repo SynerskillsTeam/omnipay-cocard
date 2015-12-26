@@ -5,7 +5,6 @@
 
 namespace Omnipay\Cocard\Message;
 
-use LSS\Array2XML;
 
 class UpdateRecurringRequest extends AbstractRequest
 {
@@ -72,17 +71,8 @@ class UpdateRecurringRequest extends AbstractRequest
         return $array;
     }
 
-    public function sendData($data)
+    public function sendData($data, $root = '')
     {
-        $xmlDom = Array2XML::createXML('update-subscription', $this->getData());
-
-        // post to Cocard
-        $headers = array(
-            'Content-Type' => 'text/xml; charset=utf-8',
-        );
-
-        $httpResponse = $this->httpClient->post($this->getEndpoint(), $headers, $xmlDom->saveXML())->send();
-
-        return $this->response = new PurchaseResponse($this, $httpResponse->getBody(true));
+        return parent::sendData($data, 'update-subscription');
     }
 }
