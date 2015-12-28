@@ -5,7 +5,7 @@
 
 namespace Omnipay\Cocard\Message;
 
-class RecurringRequest extends AbstractRequest
+class RecurringRequest extends PurchaseRequest
 {
     public function setPlanId($value)
     {
@@ -23,52 +23,28 @@ class RecurringRequest extends AbstractRequest
 
         $array = [
             'api-key' => $this->getApiKey(),
-            'redirect-url' => 'http://omnipay_demo.cc/test_complete',
-            'customer-vault-id' => '11111',
-            'start-date' => '20151224',
-            'order-id' => '1234',
-            'order-description' => '',
-            'po-number' => '',
-            'currency' => 'USD',
-            'tax-amount' => 0.00,
-            'shipping-amount' => 0.00,
+            'redirect-url' => $this->getReturnUrl(),
+            'currency' => $this->getCurrency(),
+            'billing' => $this->getBilling(),
+            'shipping' => $this->getShipping(),
             'merchant-defined-field-1' => 'test1',
-            'merchant-defined-field-2' => 'test2',
-            'billing' => [
-                [
-                    'first-name' => 'Henter',
-                    'last-name' => 'Chow',
-                    'address1' => 'Huangpu District',
-                    'address2' => 'xxx',
-                    'city' => 'Shanghai',
-                    'state' => 'Shanghai',
-                    'postal' => '1234',
-                    'country' => 'CN',
-                    'email' => 'henter@henter.me',
-                    'phone' => '55555555',
-                    'company' => 'hc',
-                    'fax' => '55555',
-                    'account-type' => 'checking',
-                    'entity-type' => 'personal'
-                ],
-            ],
-            'shipping' => [
-                [
-                    'shpping-id'=> 123,
-                    'first-name' => 'Henter',
-                    'last-name' => 'Chow',
-                    'address1' => 'Huangpu District',
-                    'address2' => 'xxx',
-                    'city' => 'Shanghai',
-                    'state' => 'Shanghai',
-                    'postal' => '1234',
-                    'country' => 'CN',
-                    'phone' => '55555555',
-                    'company' => 'hc',
-                    'fax' => '5555'
-                ],
-            ],
         ];
+
+        /**
+         * start-date, po-number, customer-vault-id, order-id, order-description,
+         * merchant-defined-field-x, tax-amount, shipping-amount
+         */
+        if ($base = $this->getBaseData()) {
+            $base_keys = [
+                'start-date', 'po-number', 'customer-vault-id', 'order-id',
+                'order-description', 'tax-amount', 'shipping-amount'
+            ];
+            foreach ($base_keys as $bk) {
+                if (isset($base[$bk])) {
+                    $array[$bk] = $base[$bk];
+                }
+            }
+        }
 
         if ($plan_id = $this->getPlanId()) {
             //to existing plan
@@ -76,7 +52,7 @@ class RecurringRequest extends AbstractRequest
         } else {
             //to a custom  plan
             $array['plan'] = [
-                'payments' => '123',
+                'payments' => '0',
                 'amount' => $this->getAmount(),
                 'day-frequency' => '',
                 'month-frequency' => '1',

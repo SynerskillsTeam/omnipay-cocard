@@ -5,12 +5,22 @@
 
 namespace Omnipay\Cocard\Message;
 
-
 class PurchaseRequest extends AbstractRequest
 {
     public function setBilling($value)
     {
-        $this->setParameter('billing', $value);
+        $keys = [
+            'billing-id', 'first-name', 'last-name', 'address1', 'address2',
+            'country', 'state',  'city', 'postal', 'phone', 'email', 'company',
+            'fax', 'account-type', 'entity-type'
+        ];
+        $billing = [];
+        foreach ($keys as $key) {
+            if (isset($value[$key])) {
+                $billing[$key] = $value[$key];
+            }
+        }
+        return $this->setParameter('billing', $billing);
     }
 
     public function getBilling()
@@ -20,7 +30,17 @@ class PurchaseRequest extends AbstractRequest
 
     public function setShipping($value)
     {
-        $this->setParameter('shipping', $value);
+        $keys = [
+            'shipping-id', 'first-name', 'last-name', 'address1', 'address2',
+            'country', 'state',  'city', 'postal', 'phone', 'email', 'company', 'fax'
+        ];
+        $shipping = [];
+        foreach ($keys as $key) {
+            if (isset($value[$key])) {
+                $shipping[$key] = $value[$key];
+            }
+        }
+        return $this->setParameter('shipping', $shipping);
     }
 
     public function getShipping()
@@ -30,7 +50,7 @@ class PurchaseRequest extends AbstractRequest
 
     public function setBaseData($value)
     {
-        $this->setParameter('baseData', $value);
+        return $this->setParameter('baseData', $value);
     }
 
     public function getBaseData()
@@ -70,7 +90,8 @@ class PurchaseRequest extends AbstractRequest
                 }
             }
         }
-        return $this->setParameter('products', $products);
+        $this->setParameter('products', $products);
+        return $this;
     }
 
     public function getData()
@@ -110,7 +131,7 @@ class PurchaseRequest extends AbstractRequest
         return $array;
     }
 
-    public function sendData($data)
+    public function sendData($data, $root = '')
     {
         return parent::sendData($data, 'sale');
     }

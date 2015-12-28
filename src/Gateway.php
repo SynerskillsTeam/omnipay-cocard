@@ -73,7 +73,6 @@ class Gateway extends \Omnipay\Common\AbstractGateway
         return $this->createRequest('\Omnipay\Cocard\Message\RefundRequest', $parameters);
     }
 
-
     /**
      * @param array $parameters
      * @return \Omnipay\Cocard\Message\RecurringRequest
@@ -92,5 +91,21 @@ class Gateway extends \Omnipay\Common\AbstractGateway
         return $this->createRequest('\Omnipay\Cocard\Message\RecurringRequest', $parameters);
     }
 
-    //TODO, customer add, update, etc.
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\AddCustomerRequest
+     */
+    public function addCustomer(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\Cocard\Message\AddCustomerRequest', $parameters);
+    }
+
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\UpdateCustomerRequest
+     */
+    public function updateCustomer(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\Cocard\Message\UpdateCustomerRequest', $parameters);
+    }
 }

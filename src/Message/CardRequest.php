@@ -5,8 +5,6 @@
 
 namespace Omnipay\Cocard\Message;
 
-use LSS\Array2XML;
-
 /**
  * Cocard Card Request
  *
