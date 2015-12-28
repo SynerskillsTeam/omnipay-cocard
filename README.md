@@ -3,8 +3,8 @@
 **Cocard gateway driver for the Omnipay PHP payment processing library**
 
 [![Build Status](https://travis-ci.org/henter/omnipay-cocard.png?branch=master)](https://travis-ci.org/henter/omnipay-cocard)
-[![Latest Stable Version](https://poser.pugx.org/henter/cocard/version.png)](https://packagist.org/packages/henter/cocard)
-[![Total Downloads](https://poser.pugx.org/henter/cocard/d/total.png)](https://packagist.org/packages/henter/cocard)
+[![Latest Stable Version](https://poser.pugx.org/henter/omnipay-cocard/version.png)](https://packagist.org/packages/henter/omnipay-cocard)
+[![Total Downloads](https://poser.pugx.org/henter/omnipay-cocard/d/total.png)](https://packagist.org/packages/henter/omnipay-cocard)
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.3+. This package implements Cocard gateway support for Omnipay.
