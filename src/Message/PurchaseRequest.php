@@ -38,7 +38,8 @@ class PurchaseRequest extends AbstractRequest
         return $this->getParameter('baseData');
     }
 
-    public function getProducts(){
+    public function getProducts()
+    {
         return $this->getParameter('products');
     }
 
@@ -48,7 +49,8 @@ class PurchaseRequest extends AbstractRequest
      * @return \Omnipay\Common\Message\AbstractRequest
      * @throws \Exception
      */
-    public function setProducts($products){
+    public function setProducts($products)
+    {
         $required_keys = [
             'product-code',
             'description',
@@ -61,9 +63,9 @@ class PurchaseRequest extends AbstractRequest
             'tax-rate'
         ];
 
-        foreach($products as $product){
-            foreach($required_keys as $rk){
-                if(!isset($product[$rk])){
+        foreach ($products as $product) {
+            foreach ($required_keys as $rk) {
+                if (!isset($product[$rk])) {
                     throw new \Exception("product key error: ".$rk);
                 }
             }
@@ -93,16 +95,16 @@ class PurchaseRequest extends AbstractRequest
         ];
 
         //customer-vault-id, order-id, order-description, merchant-defined-field-x, tax-amount, shipping-amount
-        if($base = $this->getBaseData()){
+        if ($base = $this->getBaseData()) {
             $base_keys = ['customer-vault-id', 'order-id', 'order-description', 'tax-amount', 'shipping-amount'];
-            foreach($base_keys as $bk){
-                if(isset($base[$bk])){
+            foreach ($base_keys as $bk) {
+                if (isset($base[$bk])) {
                     $array[$bk] = $base[$bk];
                 }
             }
         }
 
-        if(!$array['product']){
+        if (!$array['product']) {
             throw new \Exception("products error");
         }
         return $array;
