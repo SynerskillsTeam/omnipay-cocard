@@ -64,7 +64,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
      */
     public function sendData($data, $root = '')
     {
-        if(!$root){
+        if (!$root) {
             throw new \Exception('xml root empty');
         }
         $xmlDom = Array2XML::createXML($root, $this->getData());
