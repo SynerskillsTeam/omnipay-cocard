@@ -19,8 +19,8 @@ class RefundRequest extends AbstractRequest
         ];
     }
 
-    public function sendData($data, $root = '')
+    public function sendData($data, $root = 'refund')
     {
-        return parent::sendData($data, 'refund');
+        return parent::sendData($data, $root);
     }
 }

@@ -5,11 +5,11 @@
 
 namespace Omnipay\Cocard\Message;
 
-class UpdateCustomerRequest extends PurchaseRequest
+class UpdateCustomerRequest extends AddCustomerRequest
 {
 
-    public function sendData($data, $root = '')
+    public function sendData($data, $root = 'update-customer')
     {
-        return parent::sendData($data, 'update-customer');
+        return parent::sendData($data, $root);
     }
 }

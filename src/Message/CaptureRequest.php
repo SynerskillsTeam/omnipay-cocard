@@ -25,8 +25,8 @@ class CaptureRequest extends AbstractRequest
         ];
     }
 
-    public function sendData($data, $root = '')
+    public function sendData($data, $root = 'capture')
     {
-        return parent::sendData($data, 'capture');
+        return parent::sendData($data, $root);
     }
 }

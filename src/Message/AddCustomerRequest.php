@@ -30,8 +30,8 @@ class AddCustomerRequest extends PurchaseRequest
         return $array;
     }
 
-    public function sendData($data, $root = '')
+    public function sendData($data, $root = 'add-customer')
     {
-        return parent::sendData($data, 'add-customer');
+        return parent::sendData($data, $root);
     }
 }

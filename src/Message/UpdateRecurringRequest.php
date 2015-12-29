@@ -44,8 +44,8 @@ class UpdateRecurringRequest extends RecurringRequest
         return $array;
     }
 
-    public function sendData($data, $root = '')
+    public function sendData($data, $root = 'update-subscription')
     {
-        return parent::sendData($data, 'update-subscription');
+        return parent::sendData($data, $root);
     }
 }

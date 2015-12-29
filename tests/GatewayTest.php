@@ -17,6 +17,7 @@ class GatewayTest extends GatewayTestCase
         parent::setUp();
 
         $this->gateway = new Gateway($this->getHttpClient(), $this->getHttpRequest());
+        $this->gateway->setApiKey('2F822Rw39fx762MaV7Yy86jXGTC7sCDy');
 
         $products = [
             [
@@ -69,6 +70,7 @@ class GatewayTest extends GatewayTestCase
         );
     }
 
+    /*
     public function testPurchase()
     {
         $this->setMockHttpResponse('PurchaseSuccess.txt');
@@ -89,5 +91,97 @@ class GatewayTest extends GatewayTestCase
         $this->assertFalse($response->isSuccessful());
         $this->assertSame('300', $response->getCode());
         $this->assertSame('Transaction was rejected by gateway.', $response->getMessage());
+    }
+
+    public function testAddCustomer()
+    {
+        $options = array(
+            'returnUrl' => 'https://www.example.com/return',
+            'billing' => [
+                'first-name' => 'Henter',
+                'last-name' => 'Chow',
+                'address1' => 'Huangpu District',
+                'address2' => 'xxx',
+                'city' => 'Shanghai',
+                'state' => 'Shanghai',
+                'postal' => '1234',
+                'country' => 'CN',
+                'email' => 'henter@henter.me',
+                'phone' => '55555555',
+                'company' => 'hc',
+                'fax' => '55555'
+            ],
+            'shipping' => [
+                'first-name' => 'Henter',
+                'last-name' => 'Chow',
+                'address1' => 'Huangpu District',
+                'address2' => 'xxx',
+                'city' => 'Shanghai',
+                'state' => 'Shanghai',
+                'postal' => '1234',
+                'country' => 'CN',
+                'phone' => '55555555',
+                'company' => 'hc',
+            ],
+        );
+
+        //$this->setMockHttpResponse('CustomerSuccess.txt');
+
+        $response = $this->gateway->addCustomer($options)->send();
+        $this->assertInstanceOf('\Omnipay\Cocard\Message\Response', $response);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertArrayHasKey('form-url', $response->getData());
+        $this->assertEquals('Customer Added', $response->getText());
+
+
+    }
+    */
+
+    public function testUpdateCustomer()
+    {
+        $options = array(
+            'returnUrl' => 'https://www.example.com/return',
+            'baseData' => [
+                'customer-vault-id' => '11105',
+            ],
+            'billing' => [
+                'first-name' => 'Henter',
+                'last-name' => 'Chow',
+                'address1' => 'Huangpu District',
+                'address2' => 'xxx',
+                'city' => 'Shanghai',
+                'state' => 'Shanghai',
+                'postal' => '1234',
+                'country' => 'CN',
+                'email' => 'henter@henter.me',
+                'phone' => '55555555',
+                'company' => 'hc',
+                'fax' => '55555'
+            ],
+            'shipping' => [
+                'first-name' => 'Henter',
+                'last-name' => 'Chow',
+                'address1' => 'Huangpu District',
+                'address2' => 'xxx',
+                'city' => 'Shanghai',
+                'state' => 'Shanghai',
+                'postal' => '1234',
+                'country' => 'CN',
+                'phone' => '55555555',
+                'company' => 'hc',
+            ],
+        );
+
+        //$this->setMockHttpResponse('CustomerSuccess.txt');
+
+        $response = $this->gateway->updateCustomer($options)->send();
+        //var_dump($response->getData(), 333);exit;
+        //TODO
+        return false;
+
+        $this->assertInstanceOf('\Omnipay\Cocard\Message\Response', $response);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertArrayHasKey('form-url', $response->getData());
+        $this->assertEquals('Customer Added', $response->getText());
     }
 }

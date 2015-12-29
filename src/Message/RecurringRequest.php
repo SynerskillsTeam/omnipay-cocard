@@ -62,8 +62,8 @@ class RecurringRequest extends PurchaseRequest
         return $array;
     }
 
-    public function sendData($data, $root = '')
+    public function sendData($data, $root = 'add-subscription')
     {
-        return parent::sendData($data, 'add-subscription');
+        return parent::sendData($data, $root);
     }
 }
