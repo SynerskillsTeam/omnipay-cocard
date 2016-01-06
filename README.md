@@ -2,7 +2,7 @@
 
 **Cocard gateway driver for the Omnipay PHP payment processing library**
 
-[![Build Status](https://travis-ci.org/henter/omnipay-cocard.png?branch=master)](https://travis-ci.org/henter/omnipay-cocard)
+[![Build Status](https://travis-ci.org/SynerskillsTeam/omnipay-cocard.png?branch=master)](https://travis-ci.org/SynerskillsTeam/omnipay-cocard)
 [![Latest Stable Version](https://poser.pugx.org/henter/omnipay-cocard/version.png)](https://packagist.org/packages/henter/omnipay-cocard)
 [![Total Downloads](https://poser.pugx.org/henter/omnipay-cocard/d/total.png)](https://packagist.org/packages/henter/omnipay-cocard)
 
@@ -46,5 +46,5 @@ If you want to keep up to date with release anouncements, discuss ideas for the 
 or ask more detailed questions, there is also a [mailing list](https://groups.google.com/forum/#!forum/omnipay) which
 you can subscribe to.
 
-If you believe you have found a bug, please report it using the [GitHub issue tracker](https://github.com/henter/omnipay-cocard/issues),
+If you believe you have found a bug, please report it using the [GitHub issue tracker](https://github.com/SynerskillsTeam/omnipay-cocard/issues),
 or better yet, fork the library and submit a pull request.
