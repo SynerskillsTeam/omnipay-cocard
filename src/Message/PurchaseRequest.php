@@ -96,7 +96,7 @@ class PurchaseRequest extends AbstractRequest
 
     public function getData()
     {
-        $this->validate('amount', 'returnUrl');
+        $this->validate('amount');
 
         $array = [
             'api-key' => $this->getApiKey(),
@@ -123,6 +123,10 @@ class PurchaseRequest extends AbstractRequest
                     $array[$bk] = $base[$bk];
                 }
             }
+        }
+
+        if (!$array['redirect-url'] && !isset($array['customer-vault-id'])) {
+            throw new \Exception('parameter error: redirect-url or customer-vault-id');
         }
 
         if (!$array['product']) {
