@@ -70,7 +70,6 @@ class GatewayTest extends GatewayTestCase
         );
     }
 
-    /*
     public function testPurchase()
     {
         $this->setMockHttpResponse('PurchaseSuccess.txt');
@@ -125,7 +124,7 @@ class GatewayTest extends GatewayTestCase
             ],
         );
 
-        //$this->setMockHttpResponse('CustomerSuccess.txt');
+        $this->setMockHttpResponse('AddCustomerSuccess.txt');
 
         $response = $this->gateway->addCustomer($options)->send();
         $this->assertInstanceOf('\Omnipay\Cocard\Message\Response', $response);
@@ -135,17 +134,16 @@ class GatewayTest extends GatewayTestCase
 
 
     }
-    */
 
     public function testUpdateCustomer()
     {
         $options = array(
             'returnUrl' => 'https://www.example.com/return',
             'baseData' => [
-                'customer-vault-id' => '11105',
+                'customer-vault-id' => '652322643',
             ],
             'billing' => [
-                'first-name' => 'Henter',
+                'first-name' => 'HenterTestUpdate',
                 'last-name' => 'Chow',
                 'address1' => 'Huangpu District',
                 'address2' => 'xxx',
@@ -159,7 +157,7 @@ class GatewayTest extends GatewayTestCase
                 'fax' => '55555'
             ],
             'shipping' => [
-                'first-name' => 'Henter',
+                'first-name' => 'HenterTestUpdate',
                 'last-name' => 'Chow',
                 'address1' => 'Huangpu District',
                 'address2' => 'xxx',
@@ -172,16 +170,35 @@ class GatewayTest extends GatewayTestCase
             ],
         );
 
-        //$this->setMockHttpResponse('CustomerSuccess.txt');
+        $this->setMockHttpResponse('UpdateCustomerSuccess.txt');
 
         $response = $this->gateway->updateCustomer($options)->send();
-        //var_dump($response->getData(), 333);exit;
-        //TODO
-        return false;
 
         $this->assertInstanceOf('\Omnipay\Cocard\Message\Response', $response);
         $this->assertTrue($response->isSuccessful());
         $this->assertArrayHasKey('form-url', $response->getData());
-        $this->assertEquals('Customer Added', $response->getText());
+        $this->assertEquals('Customer Update Successful', $response->getText());
+    }
+
+    public function testDeleteCustomer()
+    {
+        $options = [
+            'baseData' => [
+                'customer-vault-id' => '1525672784_not_exists'
+            ]
+        ];
+
+        //test error result
+        $response = $this->gateway->deleteCustomer($options)->send();
+        $this->assertInstanceOf('\Omnipay\Cocard\Message\Response', $response);
+        $this->assertFalse($response->isSuccessful());
+        $this->assertStringStartsWith('Invalid Customer Vault Id', $response->getText());
+        $this->assertEquals(300, $response->getCode());
+
+        //test success result
+        $this->setMockHttpResponse('DeleteCustomerSuccess.txt');
+        $response = $this->gateway->deleteCustomer($options)->send();
+        $this->assertEquals('Customer Deleted', $response->getText());
+        $this->assertEquals(100, $response->getCode());
     }
 }
