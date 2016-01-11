@@ -1,5 +1,5 @@
 {
-    "name": "henter/omnipay-cocard",
+    "name": "unisono/omnipay-cocard",
     "type": "library",
     "description": "Cocard gateway driver for the Omnipay payment processing library",
     "keywords": [
@@ -10,7 +10,7 @@
         "pay",
         "payment"
     ],
-    "homepage": "https://github.com/henter/omnipay-cocard",
+    "homepage": "https://github.com/SynerskillsTeam/omnipay-cocard",
     "license": "MIT",
     "authors": [
         {
@@ -19,7 +19,7 @@
         },
         {
             "name": "Omnipay Contributors",
-            "homepage": "https://github.com/henter/omnipay-cocard/contributors"
+            "homepage": "https://github.com/SynerskillsTeam/omnipay-cocard/contributors"
         }
     ],
     "autoload": {
