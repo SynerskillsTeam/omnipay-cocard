@@ -1,0 +1,23 @@
+HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Length: 944
+Content-Type: text/xml; charset=utf-8
+Node: VENUS
+X-Powered-By: ASP.NET
+X-AspNet-Version: 4.0.30319
+Date: Fri, 15 Feb 2013 14:10:53 GMT
+
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <result>1</result>
+  <result-text>Plan Added</result-text>
+  <result-code>100</result-code>
+  <plan>
+    <payments>0</payments>
+    <name>testplan</name>
+    <plan-id>123456</plan-id>
+    <amount>222.22</amount>
+    <month-frequency>2</month-frequency>
+    <day-of-month>1</day-of-month>
+  </plan>
+</response>

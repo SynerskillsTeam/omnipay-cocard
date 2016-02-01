@@ -38,6 +38,17 @@ class Gateway extends \Omnipay\Common\AbstractGateway
     }
 
     /**
+     * customer credit card authorize to a transaction
+     *
+     * @param  array $parameters
+     * @return \Omnipay\Cocard\Message\AuthorizeRequest
+     */
+    public function authorize(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\Cocard\Message\AuthorizeRequest', $parameters);
+    }
+
+    /**
      * @param  array $parameters
      * @return \Omnipay\Cocard\Message\CaptureRequest
      */
@@ -47,6 +58,8 @@ class Gateway extends \Omnipay\Common\AbstractGateway
     }
 
     /**
+     * "sale" on cocardgateway
+     *
      * @param array $parameters
      * @return \Omnipay\Cocard\Message\PurchaseRequest
      */
@@ -74,6 +87,37 @@ class Gateway extends \Omnipay\Common\AbstractGateway
     }
 
     /**
+     * to void transaction
+     *
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\VoidRequest
+     */
+    public function void(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\Cocard\Message\VoidRequest', $parameters);
+    }
+
+    /**
+     * to update transaction
+     *
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\UpdateRequest
+     */
+    public function update(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\Cocard\Message\UpdateRequest', $parameters);
+    }
+
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\AddPlanRequest
+     */
+    public function addPlan(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\Cocard\Message\AddPlanRequest', $parameters);
+    }
+
+    /**
      * @param array $parameters
      * @return \Omnipay\Cocard\Message\RecurringRequest
      */
@@ -88,7 +132,16 @@ class Gateway extends \Omnipay\Common\AbstractGateway
      */
     public function updateRecurring(array $parameters = [])
     {
-        return $this->createRequest('\Omnipay\Cocard\Message\RecurringRequest', $parameters);
+        return $this->createRequest('\Omnipay\Cocard\Message\UpdateRecurringRequest', $parameters);
+    }
+
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\DeleteRecurringRequest
+     */
+    public function deleteRecurring(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\Cocard\Message\DeleteRecurringRequest', $parameters);
     }
 
     /**
@@ -116,5 +169,32 @@ class Gateway extends \Omnipay\Common\AbstractGateway
     public function deleteCustomer(array $parameters = [])
     {
         return $this->createRequest('\Omnipay\Cocard\Message\DeleteCustomerRequest', $parameters);
+    }
+
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\AddBillingRequest
+     */
+    public function addBilling(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\Cocard\Message\AddBillingRequest', $parameters);
+    }
+
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\UpdateBillingRequest
+     */
+    public function updateBilling(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\Cocard\Message\UpdateBillingRequest', $parameters);
+    }
+
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\DeleteBillingRequest
+     */
+    public function deleteBilling(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\Cocard\Message\DeleteBillingRequest', $parameters);
     }
 }
