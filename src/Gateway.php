@@ -197,4 +197,13 @@ class Gateway extends \Omnipay\Common\AbstractGateway
     {
         return $this->createRequest('\Omnipay\Cocard\Message\DeleteBillingRequest', $parameters);
     }
+
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cocard\Message\QueryRequest
+     */
+    public function query(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\Cocard\Message\QueryRequest', $parameters);
+    }
 }

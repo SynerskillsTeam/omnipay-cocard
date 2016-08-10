@@ -15,10 +15,14 @@ class Response extends AbstractResponse
     {
         parent::__construct($request, $data);
         $this->request = $request;
-        $array = XML2Array::createArray($data);
+        if (is_array($data)) {
+            $array = &$data;
+        } else {
+            $array = XML2Array::createArray($data);
+        }
 
         if (!isset($array['response'])) {
-            throw new InvalidResponseException;
+            throw new InvalidResponseException();
         }
         $this->data = $array['response'];
         unset($array);
