@@ -32,7 +32,8 @@ class QueryRequest extends AbstractRequest
             'Content-Type' => 'text/xml; charset=utf-8',
         );
 
-        $httpResponse = $this->httpClient->post($this->getEndpoint(), $headers, $this->getData())->send();
+        //$httpResponse = $this->httpClient->post($this->getEndpoint(), $headers, $this->getData())->send();
+        $httpResponse = $this->httpClient->get($this->getEndpoint(), $headers, ['query' => $this->getData()])->send();
         $array = XML2Array::createArray($httpResponse->getBody(true));
 
         if (isset($array['nm_response'])) {
